@@ -14,8 +14,19 @@ class SingleNotePresenterImpl(private val singleNoteView: SingleNote.View, priva
     }
 
     override fun onItemCheck(taskItem: TaskItem) {
+        singleNoteView.moveItemToChecked(taskItem)
+    }
 
-        onItemCheckAction.run()
+    override fun onItemRemoveFromCurrent(taskItem: TaskItem) {
+        singleNoteView.removeItemFromCurrent(taskItem)
+    }
+
+    override fun onItemUnCheck(taskItem: TaskItem) {
+        singleNoteView.moveItemFromCheckedToCurrent(taskItem)
+    }
+
+    override fun onCheckedItemDelete(taskItem: TaskItem) {
+        singleNoteView.removeItemFromChecked(taskItem)
     }
 }
 

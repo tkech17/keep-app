@@ -24,9 +24,16 @@ class CheckedTasksRecyclerViewAdapter(private val presenter: SingleNote.Presente
         return tasks.size
     }
 
-    override fun setData(taskNames: List<String>) {
+    fun setData(taskNames: List<String>) {
         val taskItems: List<TaskItem> = taskNames.map { TaskItem(id = idGenerator++, taskName = it) }
-        this.tasks.addAll(taskItems)
+        tasks.addAll(taskItems)
+
+        this.notifyDataSetChanged()
+    }
+
+    fun addSingleTaskItem(taskName: String) {
+        val taskItem: TaskItem = TaskItem(id = idGenerator++, taskName = taskName)
+        tasks.add(taskItem)
 
         this.notifyDataSetChanged()
     }
@@ -37,16 +44,19 @@ class CheckedTasksRecyclerViewAdapter(private val presenter: SingleNote.Presente
         taskViewHolder.setData(task)
     }
 
-    override fun onItemDelete(taskItem: TaskItem) {
-        removeItem(taskItem)
+    fun onItemDelete(taskItem: TaskItem) {
+        presenter.onCheckedItemDelete(taskItem)
+    }
+
+    override fun onItemRemove(taskItem: TaskItem) {
+        presenter.onCheckedItemDelete(taskItem)
     }
 
     override fun onItemCheckUnCheck(taskItem: TaskItem) {
-        removeItem(taskItem)
-        presenter.onItemCheck(taskItem)
+        presenter.onItemUnCheck(taskItem)
     }
 
-    private fun removeItem(taskItem: TaskItem) {
+    fun removeItem(taskItem: TaskItem) {
         tasks.removeIf { it.id == taskItem.id }
         this.notifyDataSetChanged()
     }

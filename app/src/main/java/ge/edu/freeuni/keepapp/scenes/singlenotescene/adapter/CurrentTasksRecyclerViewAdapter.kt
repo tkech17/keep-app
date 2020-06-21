@@ -30,23 +30,30 @@ class CurrentTasksRecyclerViewAdapter(private val presenter: SingleNote.Presente
     }
 
 
-    override fun setData(taskNames: List<String>) {
+    fun setData(taskNames: List<String>) {
         val taskItems: List<TaskItem> = taskNames.map { TaskItem(id = idGenerator++, taskName = it) }
         this.tasks.addAll(taskItems)
 
         this.notifyDataSetChanged()
     }
 
-    override fun onItemDelete(taskItem: TaskItem) {
-        removeItem(taskItem)
+    fun addSingleTaskItem(taskName: String) {
+        val taskItem: TaskItem = TaskItem(id = idGenerator++, taskName = taskName)
+        tasks.add(taskItem)
+
+        this.notifyDataSetChanged()
+    }
+
+    override fun onItemRemove(taskItem: TaskItem) {
+        presenter.onItemRemoveFromCurrent(taskItem)
+
     }
 
     override fun onItemCheckUnCheck(taskItem: TaskItem) {
-        removeItem(taskItem)
         presenter.onItemCheck(taskItem)
     }
 
-    private fun removeItem(taskItem: TaskItem) {
+    fun removeItem(taskItem: TaskItem) {
         tasks.removeIf { it.id == taskItem.id }
         this.notifyDataSetChanged()
     }

@@ -7,8 +7,12 @@ interface SingleNote {
 
     interface View {
 
+        fun moveItemToChecked(taskItem: TaskItem)
         fun goToPreviousFragment()
         fun pinnedStatusChanged(taskTopActionsBar: TaskTopActionsBar)
+        fun removeItemFromCurrent(taskItem: TaskItem)
+        fun removeItemFromChecked(taskItem: TaskItem)
+        fun moveItemFromCheckedToCurrent(taskItem: TaskItem)
 
     }
 
@@ -17,6 +21,9 @@ interface SingleNote {
         fun onBackArrowAction()
         fun onPinUnPinClick(taskTopActionsBar: TaskTopActionsBar)
         fun onItemCheck(taskItem: TaskItem)
+        fun onItemRemoveFromCurrent(taskItem: TaskItem)
+        fun onItemUnCheck(taskItem: TaskItem)
+        fun onCheckedItemDelete(taskItem: TaskItem)
 
     }
 

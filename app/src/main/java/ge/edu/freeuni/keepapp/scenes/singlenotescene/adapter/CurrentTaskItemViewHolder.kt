@@ -18,7 +18,7 @@ class CurrentTaskItemViewHolder(view: View, private val taskItemsAdapter: TaskIt
         checkBox.isChecked = isChecked
 
         checkBox.setOnClickListener { taskItemsAdapter.onItemCheckUnCheck(taskItem) }
-        deleteImage.setOnClickListener { taskItemsAdapter.onItemDelete(taskItem) }
+        deleteImage.setOnClickListener { taskItemsAdapter.onItemRemove(taskItem) }
     }
 
     fun setData(taskItem: TaskItem) {

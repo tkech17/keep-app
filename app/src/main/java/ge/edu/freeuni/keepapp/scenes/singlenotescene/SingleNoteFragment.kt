@@ -15,14 +15,14 @@ import ge.edu.freeuni.keepapp.R
 import ge.edu.freeuni.keepapp.customviews.TaskTopActionsBar
 import ge.edu.freeuni.keepapp.scenes.singlenotescene.adapter.CheckedTasksRecyclerViewAdapter
 import ge.edu.freeuni.keepapp.scenes.singlenotescene.adapter.CurrentTasksRecyclerViewAdapter
-import ge.edu.freeuni.keepapp.scenes.singlenotescene.adapter.TaskItemsAdapter
+import ge.edu.freeuni.keepapp.scenes.singlenotescene.adapter.TaskItem
 
 class SingleNoteFragment : Fragment(), SingleNote.View {
 
     private lateinit var presenter: SingleNote.Presenter
     private lateinit var taskTopActionsBar: TaskTopActionsBar
     private lateinit var title: EditText
-    private lateinit var currentTaskRecyclerViewAdapter: TaskItemsAdapter
+    private lateinit var currentTaskRecyclerViewAdapter: CurrentTasksRecyclerViewAdapter
     private lateinit var checkedTaskRecyclerViewAdapter: CheckedTasksRecyclerViewAdapter
     private lateinit var checkedItemsCountView: TextView
 
@@ -89,7 +89,7 @@ class SingleNoteFragment : Fragment(), SingleNote.View {
 
         currentTaskRecyclerViewAdapter = CurrentTasksRecyclerViewAdapter(presenter)
 
-        currentTasksRecyclerView.adapter = currentTaskRecyclerViewAdapter as CurrentTasksRecyclerViewAdapter
+        currentTasksRecyclerView.adapter = currentTaskRecyclerViewAdapter
         currentTasksRecyclerView.layoutManager = LinearLayoutManager(view.context)
 
         currentTaskRecyclerViewAdapter.setData(
@@ -116,6 +116,7 @@ class SingleNoteFragment : Fragment(), SingleNote.View {
 
     }
 
+
     private fun initTaskTopActionsBar(view: View) {
         taskTopActionsBar = view.findViewById(R.id.single_note_fragment_search_bar_view)
         taskTopActionsBar.setBackArrowOnClickListener(
@@ -124,6 +125,24 @@ class SingleNoteFragment : Fragment(), SingleNote.View {
         taskTopActionsBar.setPinnedOnClickListener(
             View.OnClickListener { presenter.onPinUnPinClick(taskTopActionsBar) }
         )
+    }
+
+    override fun removeItemFromCurrent(taskItem: TaskItem) {
+        currentTaskRecyclerViewAdapter.removeItem(taskItem)
+    }
+
+    override fun moveItemToChecked(taskItem: TaskItem) {
+        removeItemFromCurrent(taskItem)
+        checkedTaskRecyclerViewAdapter.addSingleTaskItem(taskItem.taskName)
+    }
+
+    override fun removeItemFromChecked(taskItem: TaskItem) {
+        checkedTaskRecyclerViewAdapter.removeItem(taskItem)
+    }
+
+    override fun moveItemFromCheckedToCurrent(taskItem: TaskItem) {
+        removeItemFromChecked(taskItem)
+        currentTaskRecyclerViewAdapter.addSingleTaskItem(taskItem.taskName)
     }
 
     override fun goToPreviousFragment() {
