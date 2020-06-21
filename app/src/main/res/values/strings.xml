@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">KeepApp</string>
+    <string name="no_description">no_description</string>
+    <string name="search_your_notes">Search Your Notes</string>
+    <string name="take_a_note">Take a Note…</string>
+    <string name="title">Title</string>
+    <string name="Task">List Item</string>
 </resources>
