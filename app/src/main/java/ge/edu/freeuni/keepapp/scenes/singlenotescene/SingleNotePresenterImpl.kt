@@ -2,7 +2,6 @@ package ge.edu.freeuni.keepapp.scenes.singlenotescene
 
 import ge.edu.freeuni.keepapp.customviews.TaskTopActionsBar
 import ge.edu.freeuni.keepapp.scenes.singlenotescene.adapter.TaskItem
-import kotlin.math.sin
 
 class SingleNotePresenterImpl(private val singleNoteView: SingleNote.View, private val onItemCheckAction: Runnable) : SingleNote.Presenter {
 
