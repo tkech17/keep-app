@@ -11,8 +11,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ge.edu.freeuni.keepapp.App
 import ge.edu.freeuni.keepapp.R
-import ge.edu.freeuni.keepapp.customviews.TaskTopActionsBar
+import ge.edu.freeuni.keepapp.customviews.CheckedItemsCustomView
+import ge.edu.freeuni.keepapp.customviews.TaskTopActionsBarCustomVIew
+import ge.edu.freeuni.keepapp.model.Note
 import ge.edu.freeuni.keepapp.scenes.singlenotescene.adapter.CheckedTasksRecyclerViewAdapter
 import ge.edu.freeuni.keepapp.scenes.singlenotescene.adapter.CurrentTasksRecyclerViewAdapter
 import ge.edu.freeuni.keepapp.scenes.singlenotescene.adapter.TaskItem
@@ -20,11 +23,14 @@ import ge.edu.freeuni.keepapp.scenes.singlenotescene.adapter.TaskItem
 class SingleNoteFragment : Fragment(), SingleNote.View {
 
     private lateinit var presenter: SingleNote.Presenter
-    private lateinit var taskTopActionsBar: TaskTopActionsBar
+    private lateinit var taskTopActionsBar: TaskTopActionsBarCustomVIew
     private lateinit var title: EditText
     private lateinit var currentTaskRecyclerViewAdapter: CurrentTasksRecyclerViewAdapter
     private lateinit var checkedTaskRecyclerViewAdapter: CheckedTasksRecyclerViewAdapter
     private lateinit var checkedItemsCountView: TextView
+    private lateinit var checkedItemsCountViewWrapper: CheckedItemsCustomView
+
+    private val noteId: Int = 0
 
     @SuppressLint("InflateParams")
     override fun onCreateView(
@@ -33,7 +39,7 @@ class SingleNoteFragment : Fragment(), SingleNote.View {
         savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(R.layout.single_note_fragment, null)
-        presenter = SingleNotePresenterImpl(this, Runnable { });
+        presenter = SingleNotePresenterImpl(this);
 
         title = view.findViewById(R.id.single_note_fragment_title)
 
@@ -43,9 +49,19 @@ class SingleNoteFragment : Fragment(), SingleNote.View {
         initCheckTasksRecyclerView(view)
 
         checkedItemsCountView = view.findViewById(R.id.checked_items_custom_view_items_count)
-        checkedItemsCountView.text = "${checkedTaskRecyclerViewAdapter.itemCount} Checked items"
+        checkedItemsCountViewWrapper = view.findViewById(R.id.single_note_fragment_checked_items_count)
+        updateCheckedItemsCount()
 
         return view
+    }
+
+    private fun updateCheckedItemsCount() {
+        if (checkedTaskRecyclerViewAdapter.itemCount != 0) {
+            checkedItemsCountView.text = "${checkedTaskRecyclerViewAdapter.itemCount} Checked items"
+            checkedItemsCountViewWrapper.visibility = View.VISIBLE
+        } else {
+            checkedItemsCountViewWrapper.visibility = View.INVISIBLE
+        }
     }
 
     private fun initCheckTasksRecyclerView(view: View) {
@@ -58,21 +74,6 @@ class SingleNoteFragment : Fragment(), SingleNote.View {
 
         checkedTaskRecyclerViewAdapter.setData(
             listOf(
-                "dddddddd",
-                "gggggggg",
-                "ffffffff",
-                "ffffffff",
-                "ffffffff",
-                "ffffffff",
-                "ffffffff",
-                "ffffffff",
-                "ffffffff",
-                "ffffffff",
-                "ffffffff",
-                "ffffffff",
-                "ffffffff",
-                "ffffffff",
-                "ffffffff",
                 "ffffffff",
                 "ffffffff"
             )
@@ -134,22 +135,37 @@ class SingleNoteFragment : Fragment(), SingleNote.View {
     override fun moveItemToChecked(taskItem: TaskItem) {
         removeItemFromCurrent(taskItem)
         checkedTaskRecyclerViewAdapter.addSingleTaskItem(taskItem.taskName)
+        updateCheckedItemsCount()
     }
 
     override fun removeItemFromChecked(taskItem: TaskItem) {
         checkedTaskRecyclerViewAdapter.removeItem(taskItem)
+        updateCheckedItemsCount()
     }
 
     override fun moveItemFromCheckedToCurrent(taskItem: TaskItem) {
         removeItemFromChecked(taskItem)
         currentTaskRecyclerViewAdapter.addSingleTaskItem(taskItem.taskName)
+        updateCheckedItemsCount()
     }
 
     override fun goToPreviousFragment() {
+        App.notesManager.add(createNote())
+        println(App.notesManager.getAll().size)
         findNavController().navigate(R.id.single_note_to_notes_list_action)
     }
 
-    override fun pinnedStatusChanged(taskTopActionsBar: TaskTopActionsBar) {
+    private fun createNote(): Note {
+        return Note(
+            id = noteId,
+            title = title.text.toString(),
+            currentTasks = currentTaskRecyclerViewAdapter.getTasks(),
+            checkedTasks = checkedTaskRecyclerViewAdapter.getTasks(),
+            pinned = taskTopActionsBar.isPinned()
+        )
+    }
+
+    override fun pinnedStatusChanged(taskTopActionsBar: TaskTopActionsBarCustomVIew) {
         taskTopActionsBar.changePinnedStatus()
     }
 }

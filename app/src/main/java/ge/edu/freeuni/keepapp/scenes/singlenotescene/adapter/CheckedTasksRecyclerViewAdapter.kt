@@ -10,7 +10,9 @@ import ge.edu.freeuni.keepapp.scenes.singlenotescene.SingleNote
 class CheckedTasksRecyclerViewAdapter(private val presenter: SingleNote.Presenter) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), TaskItemsAdapter {
 
     private val tasks: MutableList<TaskItem> = mutableListOf()
-    private var idGenerator: Int = 0
+    companion object {
+        private var idGenerator: Int = 0
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view: View = LayoutInflater
@@ -32,7 +34,7 @@ class CheckedTasksRecyclerViewAdapter(private val presenter: SingleNote.Presente
     }
 
     fun addSingleTaskItem(taskName: String) {
-        val taskItem: TaskItem = TaskItem(id = idGenerator++, taskName = taskName)
+        val taskItem = TaskItem(id = idGenerator++, taskName = taskName)
         tasks.add(taskItem)
 
         this.notifyDataSetChanged()
@@ -44,16 +46,16 @@ class CheckedTasksRecyclerViewAdapter(private val presenter: SingleNote.Presente
         taskViewHolder.setData(task)
     }
 
-    fun onItemDelete(taskItem: TaskItem) {
-        presenter.onCheckedItemDelete(taskItem)
-    }
-
     override fun onItemRemove(taskItem: TaskItem) {
         presenter.onCheckedItemDelete(taskItem)
     }
 
     override fun onItemCheckUnCheck(taskItem: TaskItem) {
         presenter.onItemUnCheck(taskItem)
+    }
+
+    override fun getTasks(): List<String> {
+        return tasks.map { it.taskName }
     }
 
     fun removeItem(taskItem: TaskItem) {

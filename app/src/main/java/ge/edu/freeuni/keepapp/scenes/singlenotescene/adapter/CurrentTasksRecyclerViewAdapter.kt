@@ -53,6 +53,10 @@ class CurrentTasksRecyclerViewAdapter(private val presenter: SingleNote.Presente
         presenter.onItemCheck(taskItem)
     }
 
+    override fun getTasks(): List<String> {
+        return tasks.map { it.taskName }
+    }
+
     fun removeItem(taskItem: TaskItem) {
         tasks.removeIf { it.id == taskItem.id }
         this.notifyDataSetChanged()

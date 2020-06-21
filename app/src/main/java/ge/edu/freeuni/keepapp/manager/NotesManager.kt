@@ -1,13 +1,13 @@
 package ge.edu.freeuni.keepapp.manager
 
-import ge.edu.freeuni.keepapp.model.NoteEntity
+import ge.edu.freeuni.keepapp.model.Note
 
 interface NotesManager {
 
-    fun add(note: NoteEntity)
+    fun add(note: Note)
 
-    fun remove(note: NoteEntity)
+    fun remove(note: Note)
 
-    fun getAll(): List<NoteEntity>
+    fun getAll(): List<Note>
 
 }

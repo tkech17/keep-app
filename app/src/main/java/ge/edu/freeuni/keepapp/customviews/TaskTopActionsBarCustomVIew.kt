@@ -6,7 +6,7 @@ import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import ge.edu.freeuni.keepapp.R
 
-class TaskTopActionsBar(context: Context?, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
+class TaskTopActionsBarCustomVIew(context: Context?, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
 
     private var backArrowImageView: ImageView
     private var pinnedImageView: ImageView
@@ -37,5 +37,10 @@ class TaskTopActionsBar(context: Context?, attrs: AttributeSet) : ConstraintLayo
 
         pinnedImageView.setImageResource(res)
     }
+
+    fun isPinned(): Boolean {
+        return pinned
+    }
+
 
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
 
-    <ge.edu.freeuni.keepapp.customviews.TaskTopActionsBar
+    <ge.edu.freeuni.keepapp.customviews.TaskTopActionsBarCustomVIew
         android:id="@+id/single_note_fragment_search_bar_view"
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -78,6 +78,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toStartOf="@+id/right_guideline"
                 app:layout_constraintStart_toStartOf="@+id/left_guideline"
                 app:layout_constraintTop_toBottomOf="@+id/single_note_fragment_add_items" />
