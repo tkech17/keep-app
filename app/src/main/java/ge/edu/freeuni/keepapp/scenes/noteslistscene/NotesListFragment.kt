@@ -12,12 +12,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ge.edu.freeuni.keepapp.R
 import ge.edu.freeuni.keepapp.model.Note
-import ge.edu.freeuni.keepapp.scenes.noteslistscene.adapter.PinnedNotesRecyclerViewAdapter
+import ge.edu.freeuni.keepapp.scenes.noteslistscene.adapter.NotesRecyclerViewAdapter
 
 class NotesListFragment : Fragment(), NotesList.View {
 
     private lateinit var presenter: NotesList.Presenter
-    private lateinit var pinnedNotesAdapter: PinnedNotesRecyclerViewAdapter
+    private lateinit var pinnedNotesAdapter: NotesRecyclerViewAdapter
+    private lateinit var unPinnedNotesAdapter: NotesRecyclerViewAdapter
 
     @SuppressLint("InflateParams")
     override fun onCreateView(
@@ -38,7 +39,7 @@ class NotesListFragment : Fragment(), NotesList.View {
     private fun initPinnedTask(view: View) {
         val currentTasksRecyclerView: RecyclerView = view.findViewById(R.id.notes_list_fragment_pinned_tasks_recycler_view)
 
-        pinnedNotesAdapter = PinnedNotesRecyclerViewAdapter(presenter)
+        pinnedNotesAdapter = NotesRecyclerViewAdapter(presenter)
 
         currentTasksRecyclerView.adapter = pinnedNotesAdapter
         currentTasksRecyclerView.layoutManager = GridLayoutManager(view.context, 2)
@@ -46,25 +47,45 @@ class NotesListFragment : Fragment(), NotesList.View {
         pinnedNotesAdapter.setData(
             listOf(
                 Note(
-                    title = "YLE",
+                    title = "DDD",
                     pinned = true
                 ),
                 Note(
-                    title = "MUTELI",
+                    title = "EEE",
                     pinned = true
                 ),
                 Note(
-                    title = "DEDIS TYNA",
+                    title = "FFF",
                     pinned = true
                 )
             )
-
-
         )
     }
 
     private fun initOtherTasks(view: View) {
-//        TODO("Not yet implemented")
+        val unpinnedRecyclerView: RecyclerView = view.findViewById(R.id.notes_list_fragment_unpinned_items_recycler_view)
+
+        unPinnedNotesAdapter = NotesRecyclerViewAdapter(presenter)
+
+        unpinnedRecyclerView.adapter = unPinnedNotesAdapter
+        unpinnedRecyclerView.layoutManager = GridLayoutManager(view.context, 2)
+
+        unPinnedNotesAdapter.setData(
+            listOf(
+                Note(
+                    title = "AAA",
+                    pinned = true
+                ),
+                Note(
+                    title = "BBB",
+                    pinned = true
+                ),
+                Note(
+                    title = "CCC",
+                    pinned = true
+                )
+            )
+        )
     }
 
     private fun initNextTastTextView(view: View) {

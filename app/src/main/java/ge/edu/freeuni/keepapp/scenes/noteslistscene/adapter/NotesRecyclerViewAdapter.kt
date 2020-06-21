@@ -8,7 +8,7 @@ import ge.edu.freeuni.keepapp.R
 import ge.edu.freeuni.keepapp.model.Note
 import ge.edu.freeuni.keepapp.scenes.noteslistscene.NotesList
 
-class PinnedNotesRecyclerViewAdapter(presenter: NotesList.Presenter) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class NotesRecyclerViewAdapter(presenter: NotesList.Presenter) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val notes: MutableList<Note> = mutableListOf()
 

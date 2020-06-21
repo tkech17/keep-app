@@ -75,6 +75,12 @@ class SingleNoteFragment : Fragment(), SingleNote.View {
         checkedTaskRecyclerViewAdapter.setData(
             listOf(
                 "ffffffff",
+                "ffffffff",
+                "ffffffff",
+                "ffffffff",
+                "ffffffff",
+                "ffffffff",
+                "ffffffff",
                 "ffffffff"
             )
         )
