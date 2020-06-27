@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import ge.edu.freeuni.keepapp.R
 import ge.edu.freeuni.keepapp.model.Note
 import ge.edu.freeuni.keepapp.scenes.noteslistscene.adapter.NotesRecyclerViewAdapter
@@ -42,17 +44,15 @@ class NotesListFragment : Fragment(), NotesList.View {
         pinnedNotesAdapter = NotesRecyclerViewAdapter(presenter)
 
         currentTasksRecyclerView.adapter = pinnedNotesAdapter
-        currentTasksRecyclerView.layoutManager = GridLayoutManager(view.context, 2)
+        currentTasksRecyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+
 
         pinnedNotesAdapter.setData(
             listOf(
                 Note(
                     title = "DDD",
-                    pinned = true
-                ),
-                Note(
-                    title = "EEE",
-                    pinned = true
+                    pinned = true,
+                    currentTasks = listOf("1", "2", "3", "4", "5")
                 ),
                 Note(
                     title = "FFF",
@@ -68,7 +68,7 @@ class NotesListFragment : Fragment(), NotesList.View {
         unPinnedNotesAdapter = NotesRecyclerViewAdapter(presenter)
 
         unpinnedRecyclerView.adapter = unPinnedNotesAdapter
-        unpinnedRecyclerView.layoutManager = GridLayoutManager(view.context, 2)
+        unpinnedRecyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
         unPinnedNotesAdapter.setData(
             listOf(
