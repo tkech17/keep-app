@@ -147,7 +147,12 @@ class SingleNoteFragment : Fragment(), SingleNote.View {
     override fun goToPreviousFragment() {
         runBlocking {
             lifecycleScope.launch(Dispatchers.IO) {
-                App.notesManager.add(createNote())
+                val userNote: Note = createNote()
+                if (userNote.id != 0 && userNote.currentTasks.isEmpty()) {
+                    App.notesManager.remove(userNote)
+                } else if (userNote.id == 0 && userNote.currentTasks.isNotEmpty()) {
+                    App.notesManager.add(userNote)
+                }
             }.join()
         }
         findNavController().navigate(R.id.single_note_to_notes_list_action)

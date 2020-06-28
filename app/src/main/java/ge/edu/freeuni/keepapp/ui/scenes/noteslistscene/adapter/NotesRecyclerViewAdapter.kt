@@ -1,5 +1,6 @@
 package ge.edu.freeuni.keepapp.ui.scenes.noteslistscene.adapter
 
+import android.view.DragEvent.ACTION_DROP
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,11 +18,6 @@ class NotesRecyclerViewAdapter(private val presenter: NotesList.Presenter) : Rec
             .from(parent.context)
             .inflate(R.layout.note_wrapper_custom_view, parent, false)
 
-        view.setOnClickListener(
-            View.OnClickListener {
-
-            }
-        )
         return NoteViewHolder(view)
     }
 
