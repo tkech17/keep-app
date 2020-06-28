@@ -11,7 +11,7 @@ data class NoteEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
 
-    val title: String?,
+    val title: String,
 
     val currentTasks: ArrayList<String> = ArrayList(),
     val checkedTasks: ArrayList<String> = ArrayList(),

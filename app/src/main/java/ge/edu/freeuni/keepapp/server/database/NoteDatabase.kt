@@ -9,7 +9,7 @@ import ge.edu.freeuni.keepapp.server.database.helpers.converters.DateConverter
 import ge.edu.freeuni.keepapp.server.database.helpers.converters.StringListTypeConverter
 import ge.edu.freeuni.keepapp.server.model.NoteEntity
 
-@Database(entities = [NoteEntity::class], version = 2, exportSchema = false)
+@Database(entities = [NoteEntity::class], version = 3, exportSchema = false)
 @TypeConverters(value = [StringListTypeConverter::class, DateConverter::class])
 abstract class NoteDatabase : RoomDatabase() {
 

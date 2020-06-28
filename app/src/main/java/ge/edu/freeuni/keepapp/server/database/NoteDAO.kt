@@ -7,7 +7,7 @@ import ge.edu.freeuni.keepapp.server.model.NoteEntity
 interface NoteDAO {
 
     @Query("SELECT * FROM Note n WHERE n.pinned = :pinned AND n.title LIKE '%' || :title ||  '%' ")
-    fun filterNotes(pinned: Boolean, title: String?): List<NoteEntity>
+    fun filterNotes(pinned: Boolean, title: String): List<NoteEntity>
 
     @Insert
     fun insertNote(note: NoteEntity)

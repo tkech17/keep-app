@@ -81,8 +81,9 @@ class NotesListFragment : Fragment(), NotesList.View {
 
         runBlocking {
             lifecycleScope.launch(Dispatchers.IO) {
-                checkedNotes.addAll(App.notesManager.getItemsFiltered(true, getSearchText()))
-            }
+                val checked: List<Note> = App.notesManager.getItemsFiltered(true, getSearchText())
+                checkedNotes.addAll(checked)
+            }.join()
         }
 
         if (checkedNotes.isEmpty()) {
@@ -100,8 +101,10 @@ class NotesListFragment : Fragment(), NotesList.View {
 
         runBlocking {
             lifecycleScope.launch(Dispatchers.IO) {
-                currentNotes.addAll(App.notesManager.getItemsFiltered(false, getSearchText()))
-            }
+                val curr: List<Note> = App.notesManager.getItemsFiltered(false, getSearchText())
+                println("size = ${curr.size}")
+                currentNotes.addAll(curr)
+            }.join()
         }
 
         currentNotes.add(
@@ -113,7 +116,7 @@ class NotesListFragment : Fragment(), NotesList.View {
             )
         )
 
-
+        println(currentNotes.size)
         if (currentNotes.isEmpty()) {
             unPinnedTestView.visibility = View.GONE
         } else {

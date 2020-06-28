@@ -23,7 +23,6 @@ class NotesManagerImpl(appContext: Context) : NotesManager {
         } else {
             noteDAO.updateNote(noteEntity)
         }
-
     }
 
     override fun remove(note: Note) {
@@ -31,7 +30,7 @@ class NotesManagerImpl(appContext: Context) : NotesManager {
         noteDAO.deleteNote(noteEntity)
     }
 
-    override fun getItemsFiltered(pinned: Boolean, title: String?): List<Note> {
+    override fun getItemsFiltered(pinned: Boolean, title: String): List<Note> {
         val items: List<NoteEntity> = noteDAO.filterNotes(pinned, title)
         return toModels(items)
     }

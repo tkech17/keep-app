@@ -22,6 +22,7 @@ import ge.edu.freeuni.keepapp.ui.scenes.singlenotescene.adapter.CurrentTasksRecy
 import ge.edu.freeuni.keepapp.ui.scenes.singlenotescene.adapter.TaskItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class SingleNoteFragment : Fragment(), SingleNote.View {
 
@@ -50,6 +51,8 @@ class SingleNoteFragment : Fragment(), SingleNote.View {
         presenter = SingleNotePresenterImpl(this);
 
         title = view.findViewById(R.id.single_note_fragment_title)
+        note?.let { title.setText(it.title) }
+
 
         initTaskTopActionsBar(view)
         initCurrentTasksRecyclerView(view)
@@ -136,8 +139,10 @@ class SingleNoteFragment : Fragment(), SingleNote.View {
     }
 
     override fun goToPreviousFragment() {
-        lifecycleScope.launch(Dispatchers.IO) {
-            App.notesManager.add(createNote())
+        runBlocking {
+            lifecycleScope.launch(Dispatchers.IO) {
+                App.notesManager.add(createNote())
+            }
         }
         findNavController().navigate(R.id.single_note_to_notes_list_action)
     }

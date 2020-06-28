@@ -9,7 +9,7 @@ data class Note(
 
     var id: Int = 0,
 
-    val title: String?,
+    val title: String,
 
     var currentTasks: List<String> = ArrayList(),
     var checkedTasks: List<String> = ArrayList(),
