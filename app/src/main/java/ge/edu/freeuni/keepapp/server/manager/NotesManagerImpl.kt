@@ -31,14 +31,9 @@ class NotesManagerImpl(appContext: Context) : NotesManager {
         noteDAO.deleteNote(noteEntity)
     }
 
-    override fun getCurrentItems(): List<Note> {
-        val checkedItems: List<NoteEntity> = noteDAO.getAllNotes().filter { it.pinned }
-        return toModels(checkedItems)
-    }
-
-    override fun getCheckedItems(): List<Note> {
-        val checkedItems: List<NoteEntity> = noteDAO.getAllNotes().filter { !it.pinned }
-        return toModels(checkedItems)
+    override fun getItemsFiltered(pinned: Boolean, title: String?): List<Note> {
+        val items: List<NoteEntity> = noteDAO.filterNotes(pinned, title)
+        return toModels(items)
     }
 
 }

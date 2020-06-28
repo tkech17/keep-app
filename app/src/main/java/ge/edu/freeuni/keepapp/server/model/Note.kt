@@ -1,5 +1,6 @@
 package ge.edu.freeuni.keepapp.server.model
 
+import java.io.Serializable
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -19,4 +20,4 @@ data class Note(
 
     var pinned: Boolean
 
-)
+): Serializable

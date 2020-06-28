@@ -8,7 +8,7 @@ import ge.edu.freeuni.keepapp.R
 import ge.edu.freeuni.keepapp.server.model.Note
 import ge.edu.freeuni.keepapp.ui.scenes.noteslistscene.NotesList
 
-class NotesRecyclerViewAdapter(presenter: NotesList.Presenter) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class NotesRecyclerViewAdapter(private val presenter: NotesList.Presenter) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val notes: MutableList<Note> = mutableListOf()
 
@@ -16,6 +16,12 @@ class NotesRecyclerViewAdapter(presenter: NotesList.Presenter) : RecyclerView.Ad
         val view: View = LayoutInflater
             .from(parent.context)
             .inflate(R.layout.note_wrapper_custom_view, parent, false)
+
+        view.setOnClickListener(
+            View.OnClickListener {
+
+            }
+        )
         return NoteViewHolder(view)
     }
 
@@ -26,7 +32,11 @@ class NotesRecyclerViewAdapter(presenter: NotesList.Presenter) : RecyclerView.Ad
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val task: Note = notes[position]
         val noteHolder: NoteViewHolder = holder as NoteViewHolder
-        noteHolder.setData(task)
+
+        noteHolder.also {
+            it.itemView.setOnClickListener { presenter.onNoteClick(task) }
+            it.setData(task)
+        }
     }
 
 

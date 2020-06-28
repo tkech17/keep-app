@@ -14,15 +14,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ge.edu.freeuni.keepapp.App
 import ge.edu.freeuni.keepapp.R
+import ge.edu.freeuni.keepapp.server.model.Note
 import ge.edu.freeuni.keepapp.ui.customviews.CheckedItemsCustomView
 import ge.edu.freeuni.keepapp.ui.customviews.TaskTopActionsBarCustomVIew
-import ge.edu.freeuni.keepapp.server.model.Note
 import ge.edu.freeuni.keepapp.ui.scenes.singlenotescene.adapter.CheckedTasksRecyclerViewAdapter
 import ge.edu.freeuni.keepapp.ui.scenes.singlenotescene.adapter.CurrentTasksRecyclerViewAdapter
 import ge.edu.freeuni.keepapp.ui.scenes.singlenotescene.adapter.TaskItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class SingleNoteFragment : Fragment(), SingleNote.View {
 
@@ -33,8 +32,13 @@ class SingleNoteFragment : Fragment(), SingleNote.View {
     private lateinit var checkedTaskRecyclerViewAdapter: CheckedTasksRecyclerViewAdapter
     private lateinit var checkedItemsCountView: TextView
     private lateinit var checkedItemsCountViewWrapper: CheckedItemsCustomView
+    private var note: Note? = null
 
-    private val noteId: Int = 0
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        note = arguments?.get("data") as Note?
+    }
 
     @SuppressLint("InflateParams")
     override fun onCreateView(
@@ -77,19 +81,9 @@ class SingleNoteFragment : Fragment(), SingleNote.View {
         currentTasksRecyclerView.adapter = checkedTaskRecyclerViewAdapter
         currentTasksRecyclerView.layoutManager = LinearLayoutManager(view.context)
 
-        checkedTaskRecyclerViewAdapter.setData(
-            listOf(
-                "ffffffff",
-                "ffffffff",
-                "ffffffff",
-                "ffffffff",
-                "ffffffff",
-                "ffffffff",
-                "ffffffff",
-                "ffffffff"
-            )
-        )
-
+        note?.let {
+            checkedTaskRecyclerViewAdapter.setData(it.checkedTasks)
+        }
     }
 
     private fun initAddItem(view: View?) {
@@ -104,28 +98,9 @@ class SingleNoteFragment : Fragment(), SingleNote.View {
         currentTasksRecyclerView.adapter = currentTaskRecyclerViewAdapter
         currentTasksRecyclerView.layoutManager = LinearLayoutManager(view.context)
 
-        currentTaskRecyclerViewAdapter.setData(
-            listOf(
-                "aaaaaaaa",
-                "bbbbbbbb",
-                "bbbbbbbb",
-                "bbbbbbbb",
-                "bbbbbbbb",
-                "bbbbbbbb",
-                "bbbbbbbb",
-                "bbbbbbbb",
-                "bbbbbbbb",
-                "bbbbbbbb",
-                "bbbbbbbb",
-                "bbbbbbbb",
-                "bbbbbbbb",
-                "bbbbbbbb",
-                "bbbbbbbb",
-                "bbbbbbbb",
-                "cccccccc"
-            )
-        )
-
+        note?.let {
+            currentTaskRecyclerViewAdapter.setData(it.currentTasks)
+        }
     }
 
 
@@ -163,19 +138,19 @@ class SingleNoteFragment : Fragment(), SingleNote.View {
     override fun goToPreviousFragment() {
         lifecycleScope.launch(Dispatchers.IO) {
             App.notesManager.add(createNote())
-            println(App.notesManager.getCurrentItems())
         }
         findNavController().navigate(R.id.single_note_to_notes_list_action)
     }
 
     private fun createNote(): Note {
-        return Note(
-            id = noteId,
+        val noteToSave = Note(
             title = title.text.toString(),
             currentTasks = currentTaskRecyclerViewAdapter.getTasks(),
             checkedTasks = checkedTaskRecyclerViewAdapter.getTasks(),
             pinned = taskTopActionsBar.isPinned()
         )
+        note?.let { noteToSave.id = it.id }
+        return noteToSave
     }
 
     override fun pinnedStatusChanged(taskTopActionsBar: TaskTopActionsBarCustomVIew) {

@@ -8,7 +8,6 @@ interface NotesManager {
 
     fun remove(note: Note)
 
-    fun getCurrentItems(): List<Note>
-    fun getCheckedItems(): List<Note>
+    fun getItemsFiltered(pinned: Boolean, title: String?): List<Note>
 
 }
