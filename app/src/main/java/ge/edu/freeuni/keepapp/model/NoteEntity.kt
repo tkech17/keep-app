@@ -2,6 +2,7 @@ package ge.edu.freeuni.keepapp.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -13,8 +14,8 @@ data class NoteEntity(
 
     val title: String?,
 
-    val currentTasks: List<String> = ArrayList(),
-    val checkedTasks: List<String> = ArrayList(),
+    val currentTasks: ArrayList<String> = ArrayList(),
+    val checkedTasks: ArrayList<String> = ArrayList(),
 
     val createTime: Date?,
 

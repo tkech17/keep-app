@@ -7,8 +7,8 @@ fun toEntity(note: Note): NoteEntity {
     return NoteEntity(
         id = note.id,
         title = note.title,
-        currentTasks = note.currentTasks,
-        checkedTasks = note.checkedTasks,
+        currentTasks = ArrayList(note.currentTasks),
+        checkedTasks = ArrayList(note.checkedTasks),
         createTime = note.createTime,
         lastUpdateTime = note.lastUpdateTime,
         pinned = note.pinned

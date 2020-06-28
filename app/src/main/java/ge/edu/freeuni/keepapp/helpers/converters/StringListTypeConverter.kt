@@ -14,7 +14,7 @@ class StringListTypeConverter {
     }
 
     @TypeConverter
-    fun fromArrayList(list: ArrayList<String?>?): String? {
+    fun fromArrayList(list: ArrayList<String>?): String? {
         return Gson().toJson(list)
     }
 

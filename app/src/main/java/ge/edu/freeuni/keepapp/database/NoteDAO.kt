@@ -1,4 +1,4 @@
-package ge.edu.freeuni.keepapp.dao
+package ge.edu.freeuni.keepapp.database
 
 import androidx.room.Dao
 import androidx.room.Delete
