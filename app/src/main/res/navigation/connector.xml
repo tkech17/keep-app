@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/notesListFragment"
-        android:name="ge.edu.freeuni.keepapp.scenes.noteslistscene.NotesListFragment"
+        android:name="ge.edu.freeuni.keepapp.ui.scenes.noteslistscene.NotesListFragment"
         android:label="NotesListFragment" >
         <action
             android:id="@+id/note_list_to_single_note"
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/singleNoteFragment"
-        android:name="ge.edu.freeuni.keepapp.scenes.singlenotescene.SingleNoteFragment"
+        android:name="ge.edu.freeuni.keepapp.ui.scenes.singlenotescene.SingleNoteFragment"
         android:label="SingleNoteFragment" >
         <action
             android:id="@+id/single_note_to_notes_list_action"

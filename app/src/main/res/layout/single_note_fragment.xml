@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
 
-    <ge.edu.freeuni.keepapp.customviews.TaskTopActionsBarCustomVIew
+    <ge.edu.freeuni.keepapp.ui.customviews.TaskTopActionsBarCustomVIew
         android:id="@+id/single_note_fragment_search_bar_view"
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -64,7 +64,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/single_note_fragment_title"
                 tools:listitem="@layout/task_item_custom_view" />
 
-            <ge.edu.freeuni.keepapp.customviews.AddItemCustomView
+            <ge.edu.freeuni.keepapp.ui.customviews.AddItemCustomView
                 android:id="@+id/single_note_fragment_add_items"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/single_note_fragment_current_tasks_recycler_view" />
 
 
-            <ge.edu.freeuni.keepapp.customviews.CheckedItemsCustomView
+            <ge.edu.freeuni.keepapp.ui.customviews.CheckedItemsCustomView
                 android:id="@+id/single_note_fragment_checked_items_count"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

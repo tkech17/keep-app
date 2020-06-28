@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
 
-    <ge.edu.freeuni.keepapp.customviews.TaskCustomView
+    <ge.edu.freeuni.keepapp.ui.customviews.TaskCustomView
         android:id="@+id/current_task_list_item_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

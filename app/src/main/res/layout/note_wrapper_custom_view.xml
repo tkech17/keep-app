@@ -17,49 +17,43 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Title" />
 
-    <TextView
+    <ge.edu.freeuni.keepapp.ui.customviews.TaskCustomViewReadOnly
         android:id="@+id/note_wrapper_custom_view_task_1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/note_wrapper_custom_view_title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="task 1" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+    <ge.edu.freeuni.keepapp.ui.customviews.TaskCustomViewReadOnly
         android:id="@+id/note_wrapper_custom_view_task_2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/note_wrapper_custom_view_task_1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="task 2" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+    <ge.edu.freeuni.keepapp.ui.customviews.TaskCustomViewReadOnly
         android:id="@+id/note_wrapper_custom_view_task_3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/note_wrapper_custom_view_task_2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="task 3" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+
+    <ge.edu.freeuni.keepapp.ui.customviews.TaskCustomViewReadOnly
         android:id="@+id/note_wrapper_custom_view_task_4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/note_wrapper_custom_view_task_3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="task 4" />
+        app:layout_constraintStart_toStartOf="parent" />
+
 
     <TextView
         android:id="@+id/note_wrapper_custom_view_checked_items_count"
