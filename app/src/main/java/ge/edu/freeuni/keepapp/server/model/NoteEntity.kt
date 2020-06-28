@@ -16,8 +16,6 @@ data class NoteEntity(
     val currentTasks: ArrayList<String> = ArrayList(),
     val checkedTasks: ArrayList<String> = ArrayList(),
 
-    val createTime: Date?,
-
     val lastUpdateTime: Date?,
 
     val pinned: Boolean

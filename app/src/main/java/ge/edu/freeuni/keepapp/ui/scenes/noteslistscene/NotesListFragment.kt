@@ -8,6 +8,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -31,7 +32,7 @@ class NotesListFragment : Fragment(), NotesList.View {
     private lateinit var unPinnedNotesAdapter: NotesRecyclerViewAdapter
 
 
-    private lateinit var searchBar: TextView
+    private lateinit var searchBar: EditText
     private lateinit var pinnedTextView: TextView
     private lateinit var unPinnedTestView: TextView
 
@@ -106,15 +107,6 @@ class NotesListFragment : Fragment(), NotesList.View {
                 currentNotes.addAll(curr)
             }.join()
         }
-
-        currentNotes.add(
-            Note(
-                pinned = false,
-                title = "ASD",
-                currentTasks = listOf("a", "b", "c"),
-                checkedTasks = listOf("a", "bb", "c")
-            )
-        )
 
         println(currentNotes.size)
         if (currentNotes.isEmpty()) {

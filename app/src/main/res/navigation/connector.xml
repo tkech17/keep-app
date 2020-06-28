@@ -19,7 +19,6 @@
         android:label="SingleNoteFragment" >
         <action
             android:id="@+id/single_note_to_notes_list_action"
-            app:destination="@id/notesListFragment"
-            app:enterAnim="@android:anim/slide_out_right" />
+            app:destination="@id/notesListFragment" />
     </fragment>
 </navigation>

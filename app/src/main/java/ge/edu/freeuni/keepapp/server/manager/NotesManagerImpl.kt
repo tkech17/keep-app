@@ -14,7 +14,6 @@ class NotesManagerImpl(appContext: Context) : NotesManager {
     private val noteDAO: NoteDAO = NoteDatabase.getInstance(appContext).getNoteDao()
 
     override fun add(note: Note) {
-        note.createTime = Date()
         note.lastUpdateTime = Date()
 
         val noteEntity: NoteEntity = toEntity(note)

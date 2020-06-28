@@ -9,7 +9,6 @@ fun toEntity(note: Note): NoteEntity {
         title = note.title,
         currentTasks = ArrayList(note.currentTasks),
         checkedTasks = ArrayList(note.checkedTasks),
-        createTime = note.createTime,
         lastUpdateTime = note.lastUpdateTime,
         pinned = note.pinned
     )
@@ -25,7 +24,6 @@ private fun toModel(noteEntity: NoteEntity): Note {
         title = noteEntity.title,
         currentTasks = noteEntity.currentTasks,
         checkedTasks = noteEntity.checkedTasks,
-        createTime = noteEntity.createTime,
         lastUpdateTime = noteEntity.lastUpdateTime,
         pinned = noteEntity.pinned
     )
